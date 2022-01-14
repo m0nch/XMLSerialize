@@ -9,8 +9,6 @@ namespace XMLSerialize.Services
 {
     internal class TeacherService : ITeacherService
     {
-        private const string XmlTeacher = "teacher.xml";
-
         private readonly IFileManager<Teacher> _fileManager;
 
         public TeacherService(IFileManager<Teacher> fileManager)
@@ -19,33 +17,33 @@ namespace XMLSerialize.Services
         }
         public void Add(Teacher model)
         {
-            List<Teacher> teachers = _fileManager.Read(XmlTeacher);
+            List<Teacher> teachers = _fileManager.Read(_fileManager.XmlTeacher);
             teachers.Add(model);
-            _fileManager.Write(teachers, XmlTeacher);
+            _fileManager.Write(teachers, _fileManager.XmlTeacher);
         }
         public Teacher Get(Guid id)
         {
-            Teacher teacher = _fileManager.Read(XmlTeacher).FirstOrDefault(x => x.Id == id);
+            Teacher teacher = _fileManager.Read(_fileManager.XmlTeacher).FirstOrDefault(x => x.Id == id);
             return teacher;
         }
         public List<Teacher> GetAll()
         {
-            return _fileManager.Read(XmlTeacher);
+            return _fileManager.Read(_fileManager.XmlTeacher);
         }
         public void Remove(Guid id)
         {
-            List<Teacher> teachers = _fileManager.Read(XmlTeacher);
+            List<Teacher> teachers = _fileManager.Read(_fileManager.XmlTeacher);
             Teacher teacher = teachers.FirstOrDefault(x => x.Id == id);
             teachers.Remove(teacher);
-            _fileManager.Write(teachers, XmlTeacher);
+            _fileManager.Write(teachers, _fileManager.XmlTeacher);
         }
         public void Update(Teacher model)
         {
-            List<Teacher> teachers = _fileManager.Read(XmlTeacher);
+            List<Teacher> teachers = _fileManager.Read(_fileManager.XmlTeacher);
             Teacher teacher = teachers.FirstOrDefault(t => t.Id == model.Id);
             int index = teachers.IndexOf(teacher);
             teachers[index] = model;
-            _fileManager.Write(teachers, XmlTeacher);
+            _fileManager.Write(teachers, _fileManager.XmlTeacher);
         }
     }
 }

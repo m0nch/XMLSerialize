@@ -14,6 +14,9 @@ namespace XMLSerialize.Data.DB
 {
     internal class FileManager<T> : IFileManager<T>
     {
+        public string XmlTeacher { get; set; } = "teacher.xml";
+        public string XmlStudent { get; set; } = "student.xml";
+
         public void Write(List<T> models, string file)
         {
             FileStream stream = new FileStream(file, FileMode.Create);
